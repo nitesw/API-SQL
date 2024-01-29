@@ -1,0 +1,11 @@
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\bin\Debug\net8.0\NewsApi.Core.deps.json
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\bin\Debug\net8.0\NewsApi.Core.dll
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\bin\Debug\net8.0\NewsApi.Core.pdb
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.AssemblyInfoInputs.cache
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.AssemblyInfo.cs
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.csproj.CoreCompileInputs.cache
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.dll
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\refint\NewsApi.Core.dll
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.pdb
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\ref\NewsApi.Core.dll
