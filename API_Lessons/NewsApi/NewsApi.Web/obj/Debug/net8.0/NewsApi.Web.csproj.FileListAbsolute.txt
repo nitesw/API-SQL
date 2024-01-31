@@ -170,3 +170,4 @@ E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Web\bin\Debug\net8.0\
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Web\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Web\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Web\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Web\obj\Debug\net8.0\NewsApi.Web.sourcelink.json

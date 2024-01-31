@@ -11,12 +11,15 @@ namespace NewsApi.Core.Entities
     public class News
     {
         public int Id { get; set; }
-        [MaxLength(100)]
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
-        public string Author { get; set; } = string.Empty;
 
+        //public string Author { get; set; } = string.Empty;
+        public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
+
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         /*public TimeOnly CreationTime { get; set; }
         public DateOnly CreationDate { get; set; }*/

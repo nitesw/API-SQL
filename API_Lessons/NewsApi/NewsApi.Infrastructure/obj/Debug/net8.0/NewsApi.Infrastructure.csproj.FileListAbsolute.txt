@@ -13,3 +13,4 @@ E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Infrastructure\obj\De
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Infrastructure\bin\Debug\net8.0\NewsApi.Core.dll
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Infrastructure\bin\Debug\net8.0\NewsApi.Core.pdb
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Infrastructure\obj\Debug\net8.0\NewsApi.Infrastructure.csproj.CopyComplete
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Infrastructure\obj\Debug\net8.0\NewsApi.Infrastructure.sourcelink.json

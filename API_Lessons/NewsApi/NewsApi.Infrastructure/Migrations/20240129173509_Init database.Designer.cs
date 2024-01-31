@@ -11,7 +11,7 @@ using NewsApi.Infrastructure;
 namespace NewsApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240126191138_Init database")]
+    [Migration("20240129173509_Init database")]
     partial class Initdatabase
     {
         /// <inheritdoc />

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6POLAELjPeQ+TRs9QmNJeupKkugmaDZAXn8nasDeL5rpZJi5tAB/bi4TNTNI+MzHCc0md7mSsTqO8YF4S1yc3A==",
+  "dgSpecHash": "CQQCgG0blfx9mwa/6Lb4Vt6R2E6II2PtMWhSfrSo7NYZ1uQzcjD5EFKJ+W71/zbTlnfeOVDBUL36c2WNxjRxpw==",
   "success": true,
   "projectFilePath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\NewsApi\\NewsApi.Infrastructure\\NewsApi.Infrastructure.csproj",
   "expectedPackageFiles": [
