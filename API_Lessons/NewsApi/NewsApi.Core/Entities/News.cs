@@ -21,6 +21,8 @@ namespace NewsApi.Core.Entities
 
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        public int TotalVisits { get; set; }
         /*public TimeOnly CreationTime { get; set; }
         public DateOnly CreationDate { get; set; }*/
     }

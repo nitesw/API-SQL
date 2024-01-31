@@ -108,5 +108,28 @@ namespace NewsApi.Infrastructure.Initializers
                 }
             );
         }
+        public static async Task SeedStatistics(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Statistics>().HasData(new Statistics[]
+                {
+                    new Statistics() { Id = 1, VisitorIp = "123.456.789.0", VisitorBrowser = "Chrome", 
+                        VisitorCountry = "US", NewsId = 1 },
+                    new Statistics() { Id = 2, VisitorIp = "133.446.799.1", VisitorBrowser = "Opera",
+                        VisitorCountry = "US", NewsId = 1 },
+                    new Statistics() { Id = 3, VisitorIp = "333.126.439.5", VisitorBrowser = "Mozilla Firefox",
+                        VisitorCountry = "Canada", NewsId = 2 },
+                    new Statistics() { Id = 4, VisitorIp = "232.116.654.2", VisitorBrowser = "Chrome",
+                        VisitorCountry = "France", NewsId = 2 },
+                    new Statistics() { Id = 5, VisitorIp = "196.226.743.0", VisitorBrowser = "Chrome",
+                        VisitorCountry = "Ukraine", NewsId = 3 },
+                    new Statistics() { Id = 6, VisitorIp = "133.446.799.1", VisitorBrowser = "Opera",
+                        VisitorCountry = "US", NewsId = 5 },
+                    new Statistics() { Id = 7, VisitorIp = "333.126.439.5", VisitorBrowser = "Mozilla Firefox",
+                        VisitorCountry = "Canada", NewsId = 4 },
+                    new Statistics() { Id = 8, VisitorIp = "232.116.654.2", VisitorBrowser = "Chrome",
+                        VisitorCountry = "France", NewsId = 6 }
+                }
+            );
+        }
     }
 }
