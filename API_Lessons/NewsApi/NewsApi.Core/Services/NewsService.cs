@@ -10,24 +10,33 @@ namespace NewsApi.Core.Services
 {
     public class NewsService : INewsService
     {
-        public Task<News> Delete(int id)
+        private readonly IRepository<News> _newsRepository;
+
+        public NewsService(IRepository<News> newsRepository)
         {
-            throw new NotImplementedException();
+            _newsRepository = newsRepository;
         }
 
-        public Task<News> Get(int id)
+        public async Task<News> Delete(int id)
         {
-            throw new NotImplementedException();
+            await _newsRepository.Delete(id);
+            return null;
         }
 
-        public Task<List<News>> GetAll()
+        public async Task<News> Get(int id)
         {
-            throw new NotImplementedException();
+            return (News)await _newsRepository.GetById(id);
         }
 
-        public Task<News> Update(News news)
+        public async Task<List<News>> GetAll()
         {
-            throw new NotImplementedException();
+            return (List<News>)await _newsRepository.GetAll();
+        }
+
+        public async Task<News> Update(News news)
+        {
+            await _newsRepository.Update(news);
+            return news;
         }
     }
 }

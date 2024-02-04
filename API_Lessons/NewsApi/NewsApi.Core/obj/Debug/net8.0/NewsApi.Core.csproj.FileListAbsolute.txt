@@ -10,3 +10,4 @@ E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.pdb
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\ref\NewsApi.Core.dll
 E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.sourcelink.json
+E:\ITStep_API_With_SQL_Lessons\API_Lessons\NewsApi\NewsApi.Core\obj\Debug\net8.0\NewsApi.Core.csproj.AssemblyReference.cache

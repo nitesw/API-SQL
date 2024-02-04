@@ -1,3 +1,4 @@
+using NewsApi.Core;
 using NewsApi.Infrastructure;
 
 namespace NewsApi.Web
@@ -13,6 +14,12 @@ namespace NewsApi.Web
 
             // Add AddDbContext
             builder.Services.AddDbContext(conStr);
+
+            // Add Repository
+            builder.Services.AddRepositories();
+
+            // Add Core Services
+            builder.Services.AddCoreServices();
 
             // Add services to the container.
 

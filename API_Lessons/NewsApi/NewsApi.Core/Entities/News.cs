@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsApi.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NewsApi.Core.Entities
 {
-    public class News
+    public class News : IEntity
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

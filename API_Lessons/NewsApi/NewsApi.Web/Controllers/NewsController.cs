@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NewsApi.Core.Entities;
+using NewsApi.Core.Interfaces;
 
 namespace NewsApi.Web.Controllers
 {
@@ -7,22 +9,35 @@ namespace NewsApi.Web.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        private readonly INewsService _newsService;
+
+        public NewsController(INewsService newsService)
         {
-            var news = new
-            {
-                Title = "Microsoft Office’s RTC (Real-Time Channel) migration to modern .NET",
-                Description = "Real-Time Channel (RTC) is Microsoft Office Online’s websocket service that powers " +
-                "the real-time collaboration experiences for Office applications. It serves hundreds of millions " +
-                "of document sessions per day from dozens of datacenters and thousands of server VMs around the world.",
-                Text = "Real-Time Channel (RTC) is Microsoft Office Online’s websocket service " +
-                "that powers the real-time collaboration experiences for Office applications. " +
-                "It serves hundreds of millions of document sessions per day from dozens of datacenters and thousands " +
-                "of server VMs around the world.\r\n\r\nThe service was written in .NET Framework (4.7.2) with IIS and " +
-                "ASP.NET. It is mainly built around a SignalR service providing real-time communication and has additional " +
-                "functionality like routing, session management, and notifications."
-            };
+            _newsService = newsService;
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var news = await _newsService.GetAll();
+            return Ok(news);
+        }
+        [HttpPost("Get")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var news = await _newsService.Get(id);
+            return Ok(news);
+        }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var news = await _newsService.Delete(id);
+            return Ok(news);
+        }
+        [HttpPatch("Update")]
+        public async Task<IActionResult> Update(News newsToUpdate)
+        {
+            var news = await _newsService.Update(newsToUpdate);
             return Ok(news);
         }
     }

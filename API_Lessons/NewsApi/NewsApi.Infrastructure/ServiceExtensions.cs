@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NewsApi.Core.Interfaces;
+using NewsApi.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,11 @@ namespace NewsApi.Infrastructure
                 opt.UseSqlServer(connectionString);
                 opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }

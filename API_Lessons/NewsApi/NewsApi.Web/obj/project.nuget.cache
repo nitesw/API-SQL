@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "X4ASW1Ch+NuCzEXM0cZfllXErwHnqPAnZWPsmp6njkfvlOjPVXsd4ezQ84A8I+ZJuuc6Ce/TNF4lB3bQGXkQ7g==",
+  "dgSpecHash": "MVkDcPUlKAkYszP/RzN0CQxQ+DVe3TGeavk2NbRwR0oXud2w1CQo7/fFJlp6rioAnLHXkl3GFltK2tb9b0P7hg==",
   "success": true,
   "projectFilePath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\NewsApi\\NewsApi.Web\\NewsApi.Web.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\apedo\\.nuget\\packages\\ardalis.specification\\8.0.0\\ardalis.specification.8.0.0.nupkg.sha512",
+    "C:\\Users\\apedo\\.nuget\\packages\\ardalis.specification.entityframeworkcore\\8.0.0\\ardalis.specification.entityframeworkcore.8.0.0.nupkg.sha512",
     "C:\\Users\\apedo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\apedo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\apedo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
