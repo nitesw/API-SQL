@@ -55,6 +55,8 @@ namespace NewsApi.Infrastructure.Repository
         public async Task Insert(TEntity entity)
         {
             await dbSet.AddAsync(entity);
+
+            await Save();
         }
 
         public async Task Save()

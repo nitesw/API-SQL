@@ -40,5 +40,11 @@ namespace NewsApi.Web.Controllers
             var news = await _newsService.Update(newsToUpdate);
             return Ok(news);
         }
+        [HttpPost("Insert")]
+        public async Task<IActionResult> Insert(News newsToUpdate)
+        {
+            var news = await _newsService.Insert(newsToUpdate);
+            return Ok(news);
+        }
     }
 }

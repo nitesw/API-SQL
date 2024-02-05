@@ -33,6 +33,12 @@ namespace NewsApi.Core.Services
             return (List<News>)await _newsRepository.GetAll();
         }
 
+        public async Task<News> Insert(News news)
+        {
+            await _newsRepository.Insert(news);
+            return null;
+        }
+
         public async Task<News> Update(News news)
         {
             await _newsRepository.Update(news);

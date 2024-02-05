@@ -13,5 +13,6 @@ namespace NewsApi.Core.Interfaces
         Task<News> Get(int id);
         Task<News> Update(News news);
         Task<News> Delete(int id);
+        Task<News> Insert(News news);
     }
 }
