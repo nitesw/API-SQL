@@ -31,20 +31,20 @@ namespace NewsApi.Web.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var news = await _newsService.Delete(id);
-            return Ok(news);
+            await _newsService.Delete(id);
+            return Ok();
         }
         [HttpPatch("Update")]
         public async Task<IActionResult> Update(News newsToUpdate)
         {
-            var news = await _newsService.Update(newsToUpdate);
-            return Ok(news);
+            await _newsService.Update(newsToUpdate);
+            return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(News newsToUpdate)
+        public async Task<IActionResult> Insert(News model)
         {
-            var news = await _newsService.Insert(newsToUpdate);
-            return Ok(news);
+            await _newsService.Insert(model);
+            return Ok();
         }
     }
 }

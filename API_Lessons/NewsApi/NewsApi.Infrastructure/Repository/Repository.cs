@@ -26,7 +26,6 @@ namespace NewsApi.Infrastructure.Repository
             if (entityToDelete != null)
             {
                 await Delete(entityToDelete);
-                await Save();
             }
         }
 
@@ -55,8 +54,6 @@ namespace NewsApi.Infrastructure.Repository
         public async Task Insert(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-
-            await Save();
         }
 
         public async Task Save()
@@ -71,8 +68,6 @@ namespace NewsApi.Infrastructure.Repository
                 dbSet.Attach(entityToUpdate);
                 context.Entry(entityToUpdate).State = EntityState.Modified;
             });
-
-            await Save();
         }
     }
 }

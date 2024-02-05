@@ -17,10 +17,10 @@ namespace NewsApi.Core.Services
             _newsRepository = newsRepository;
         }
 
-        public async Task<News> Delete(int id)
+        public async Task Delete(int id)
         {
             await _newsRepository.Delete(id);
-            return null;
+            await _newsRepository.Save();
         }
 
         public async Task<News> Get(int id)
@@ -33,16 +33,16 @@ namespace NewsApi.Core.Services
             return (List<News>)await _newsRepository.GetAll();
         }
 
-        public async Task<News> Insert(News news)
+        public async Task Insert(News model)
         {
-            await _newsRepository.Insert(news);
-            return null;
+            await _newsRepository.Insert(model);
+            await _newsRepository.Save();
         }
 
-        public async Task<News> Update(News news)
+        public async Task Update(News news)
         {
             await _newsRepository.Update(news);
-            return news;
+            await _newsRepository.Save();
         }
     }
 }
