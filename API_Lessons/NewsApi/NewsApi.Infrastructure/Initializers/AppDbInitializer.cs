@@ -131,5 +131,34 @@ namespace NewsApi.Infrastructure.Initializers
                 }
             );
         }
+        public static async Task SeedRole(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(new Role[]
+                {
+                    new Role() { Id = 1, Name = "Admin" },
+                    new Role() { Id = 2, Name = "Editor" },
+                    new Role() { Id = 3, Name = "Writer" }
+                }
+            );
+        }
+        public static async Task SeedUser(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(new User[]
+                {
+                    new User() { Id = 1, Name = "Bill", Surname = "Johnson", Username = "Bjohn",
+                        Age = 18, Email = "bbjohn@mail.com", Phone = "+111111111", RoleId = 3 },
+                    new User() { Id = 2, Name = "Steph", Surname = "Jube", Username = "Steph111",
+                        Age = 26, Email = "steph111@gmail.com", Phone = "+222222222", RoleId = 2 },
+                    new User() { Id = 3, Name = "Tracy", Surname = "Minaji", Username = "tracyminaji",
+                        Age = 25, Email = "tracy@gmail.com", Phone = "+333333333", RoleId = 1 },
+                    new User() { Id = 4, Name = "Gus", Surname = "Peep", Username = "peeep",
+                        Age = 31, Email = "guspeep@mail.com", Phone = "+444444444", RoleId = 3 },
+                    new User() { Id = 5, Name = "Max", Surname = "Fosh", Username = "mfosh",
+                        Age = 22, Email = "mfosh@mail.com", Phone = "+555555555", RoleId = 2 },
+                    new User() { Id = 6, Name = "Max", Surname = "Bosh", Username = "mbosh",
+                        Age = 21, Email = "mbosh@mail.com", Phone = "+666666666", RoleId = 1 }
+                }
+            );
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NewsApi.Core.Entities;
 using NewsApi.Core.Interfaces;
+using NewsApi.Core.Services;
 
 namespace NewsApi.Web.Controllers
 {

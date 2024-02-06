@@ -14,6 +14,8 @@ namespace NewsApi.Core
         public static void AddCoreServices(this IServiceCollection services)
         {
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
     }
 }

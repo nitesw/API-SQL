@@ -11,8 +11,8 @@ using NewsApi.Infrastructure;
 namespace NewsApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240131170856_Add statistics table and seeded it")]
-    partial class Addstatisticstableandseededit
+    [Migration("20240205193653_Init database")]
+    partial class Initdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,40 @@ namespace NewsApi.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NewsApi.Core.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Editor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Writer"
+                        });
+                });
+
             modelBuilder.Entity("NewsApi.Core.Entities.Statistics", b =>
                 {
                     b.Property<int>("Id")
@@ -328,6 +362,118 @@ namespace NewsApi.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NewsApi.Core.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Age = 18,
+                            Email = "bbjohn@mail.com",
+                            Name = "Bill",
+                            Phone = "+111111111",
+                            RoleId = 3,
+                            Surname = "Johnson",
+                            Username = "Bjohn"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Age = 26,
+                            Email = "steph111@gmail.com",
+                            Name = "Steph",
+                            Phone = "+222222222",
+                            RoleId = 2,
+                            Surname = "Jube",
+                            Username = "Steph111"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Age = 25,
+                            Email = "tracy@gmail.com",
+                            Name = "Tracy",
+                            Phone = "+333333333",
+                            RoleId = 1,
+                            Surname = "Minaji",
+                            Username = "tracyminaji"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Age = 31,
+                            Email = "guspeep@mail.com",
+                            Name = "Gus",
+                            Phone = "+444444444",
+                            RoleId = 3,
+                            Surname = "Peep",
+                            Username = "peeep"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Age = 22,
+                            Email = "mfosh@mail.com",
+                            Name = "Max",
+                            Phone = "+555555555",
+                            RoleId = 2,
+                            Surname = "Fosh",
+                            Username = "mfosh"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Age = 21,
+                            Email = "mbosh@mail.com",
+                            Name = "Max",
+                            Phone = "+666666666",
+                            RoleId = 1,
+                            Surname = "Bosh",
+                            Username = "mbosh"
+                        });
+                });
+
             modelBuilder.Entity("NewsApi.Core.Entities.News", b =>
                 {
                     b.HasOne("NewsApi.Core.Entities.Author", "Author")
@@ -356,6 +502,17 @@ namespace NewsApi.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("News");
+                });
+
+            modelBuilder.Entity("NewsApi.Core.Entities.User", b =>
+                {
+                    b.HasOne("NewsApi.Core.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

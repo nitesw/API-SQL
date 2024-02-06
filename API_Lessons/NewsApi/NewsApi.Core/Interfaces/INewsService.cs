@@ -11,7 +11,7 @@ namespace NewsApi.Core.Interfaces
     {
         Task<List<News>> GetAll();
         Task<News> Get(int id);
-        Task Update(News news);
+        Task Update(News model);
         Task Delete(int id);
         Task Insert(News model);
     }

@@ -39,9 +39,9 @@ namespace NewsApi.Core.Services
             await _newsRepository.Save();
         }
 
-        public async Task Update(News news)
+        public async Task Update(News model)
         {
-            await _newsRepository.Update(news);
+            await _newsRepository.Update(model);
             await _newsRepository.Save();
         }
     }
