@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NewsApi.Core.DTOs;
 using NewsApi.Core.Entities;
 using NewsApi.Core.Interfaces;
 
@@ -35,13 +36,13 @@ namespace NewsApi.Web.Controllers
             return Ok();
         }
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(User userToUpdate)
+        public async Task<IActionResult> Update(UserUpdateDto userToUpdate)
         {
             await _userService.Update(userToUpdate);
             return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(User model)
+        public async Task<IActionResult> Insert(UserDto model)
         {
             await _userService.Insert(model);
             return Ok();

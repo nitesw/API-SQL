@@ -18,6 +18,9 @@ namespace NewsApi.Web
             // Add Repository
             builder.Services.AddRepositories();
 
+            // Add Mapping
+            builder.Services.AddMapping();
+
             // Add Core Services
             builder.Services.AddCoreServices();
 

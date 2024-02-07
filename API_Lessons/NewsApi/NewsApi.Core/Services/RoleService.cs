@@ -1,4 +1,6 @@
-﻿using NewsApi.Core.Entities;
+﻿using AutoMapper;
+using NewsApi.Core.DTOs;
+using NewsApi.Core.Entities;
 using NewsApi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,12 @@ namespace NewsApi.Core.Services
     public class RoleService : IRoleService
     {
         private readonly IRepository<Role> _roleRepository;
+        private readonly IMapper _mapper;
 
-        public RoleService(IRepository<Role> roleRepository)
+        public RoleService(IRepository<Role> roleRepository, IMapper mapper)
         {
             _roleRepository = roleRepository;
+            _mapper = mapper;
         }
 
         public async Task Delete(int id)
@@ -23,25 +27,25 @@ namespace NewsApi.Core.Services
             await _roleRepository.Save();
         }
 
-        public async Task<Role> Get(int id)
+        public async Task<RoleDto> Get(int id)
         {
-            return (Role)await _roleRepository.GetById(id);
+            return _mapper.Map<RoleDto>(await _roleRepository.GetById(id));
         }
 
-        public async Task<List<Role>> GetAll()
+        public async Task<List<RoleDto>> GetAll()
         {
-            return (List<Role>)await _roleRepository.GetAll();
+            return _mapper.Map<List<RoleDto>>(await _roleRepository.GetAll());
         }
 
-        public async Task Insert(Role model)
+        public async Task Insert(RoleDto model)
         {
-            await _roleRepository.Insert(model);
+            await _roleRepository.Insert(_mapper.Map<Role>(model));
             await _roleRepository.Save();
         }
 
-        public async Task Update(Role model)
+        public async Task Update(RoleUpdateDto model)
         {
-            await _roleRepository.Update(model);
+            await _roleRepository.Update(_mapper.Map<Role>(model));
             await _roleRepository.Save();
         }
     }

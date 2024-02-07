@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NewsApi.Core.DTOs;
 using NewsApi.Core.Entities;
 using NewsApi.Core.Interfaces;
 
@@ -25,7 +26,7 @@ namespace NewsApi.Web.Controllers
         [HttpPost("Get")]
         public async Task<IActionResult> GetById(int id)
         {
-            Role? roles = await _roleService.Get(id);
+            var roles = await _roleService.Get(id);
             return Ok(roles);
         }
         [HttpDelete("Delete")]
@@ -35,13 +36,13 @@ namespace NewsApi.Web.Controllers
             return Ok();
         }
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(Role roleToUpdate)
+        public async Task<IActionResult> Update(RoleUpdateDto roleToUpdate)
         {
             await _roleService.Update(roleToUpdate);
             return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(Role model)
+        public async Task<IActionResult> Insert(RoleDto model)
         {
             await _roleService.Insert(model);
             return Ok();

@@ -26,5 +26,7 @@ namespace NewsApi.Core.Entities
         public int TotalVisits { get; set; }
         /*public TimeOnly CreationTime { get; set; }
         public DateOnly CreationDate { get; set; }*/
+
+        public string Image { get; set; } = string.Empty;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NewsApi.Core.AutoMapper;
 using NewsApi.Core.Interfaces;
 using NewsApi.Core.Services;
 using System;
@@ -16,6 +17,11 @@ namespace NewsApi.Core
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
+        }
+
+        public static void AddMapping(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(AutoMapperNewsProfile));
         }
     }
 }

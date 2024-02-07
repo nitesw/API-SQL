@@ -1,4 +1,6 @@
-﻿using NewsApi.Core.Entities;
+﻿using AutoMapper;
+using NewsApi.Core.DTOs;
+using NewsApi.Core.Entities;
 using NewsApi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,12 @@ namespace NewsApi.Core.Services
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(IRepository<User> userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task Delete(int id)
@@ -24,19 +28,19 @@ namespace NewsApi.Core.Services
             await _userRepository.Save();
         }
 
-        public async Task<User> Get(int id)
+        public async Task<UserDto> Get(int id)
         {
-            return (User)await _userRepository.GetById(id); 
+            return _mapper.Map<UserDto>(await _userRepository.GetById(id)); 
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<UserDto>> GetAll()
         {
-            return (List<User>)await _userRepository.GetAll();
+            return _mapper.Map<List<UserDto>>(await _userRepository.GetAll());
         }
 
-        public async Task Insert(User model)
+        public async Task Insert(UserDto model)
         {
-            List<User> users = (List<User>)await _userRepository.GetAll();
+            List<UserDto> users = _mapper.Map<List<UserDto>>(await _userRepository.GetAll());
             foreach (var u in users)
             {
                 if(u.Email == model.Email)
@@ -44,13 +48,14 @@ namespace NewsApi.Core.Services
                     return;
                 }
             }
-            await _userRepository.Insert(model);
+            var user = _mapper.Map<User>(model);
+            await _userRepository.Insert(user);
             await _userRepository.Save();
         }
 
-        public async Task Update(User model)
+        public async Task Update(UserUpdateDto model)
         {
-            List<User> users = (List<User>)await _userRepository.GetAll();
+            List<User> users = _mapper.Map<List<User>>(await _userRepository.GetAll());
             foreach (var u in users)
             {
                 if (u.Email == model.Email)
@@ -58,7 +63,8 @@ namespace NewsApi.Core.Services
                     return;
                 }
             }
-            await _userRepository.Update(model);
+            var user = _mapper.Map<User>(model);
+            await _userRepository.Update(user);
             await _userRepository.Save();
         }
     }

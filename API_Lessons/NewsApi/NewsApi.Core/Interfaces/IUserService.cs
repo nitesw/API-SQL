@@ -1,4 +1,5 @@
-﻿using NewsApi.Core.Entities;
+﻿using NewsApi.Core.DTOs;
+using NewsApi.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace NewsApi.Core.Interfaces
 {
     public interface IUserService
     {
-        Task<List<User>> GetAll();
-        Task<User> Get(int id);
-        Task Update(User model);
+        Task<List<UserDto>> GetAll();
+        Task<UserDto> Get(int id);
+        Task Update(UserUpdateDto model);
         Task Delete(int id);
-        Task Insert(User model);
+        Task Insert(UserDto model);
     }
 }

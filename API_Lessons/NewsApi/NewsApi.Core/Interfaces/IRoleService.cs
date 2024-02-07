@@ -1,4 +1,5 @@
-﻿using NewsApi.Core.Entities;
+﻿using NewsApi.Core.DTOs;
+using NewsApi.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace NewsApi.Core.Interfaces
 {
     public interface IRoleService
     {
-        Task<List<Role>> GetAll();
-        Task<Role> Get(int id);
-        Task Update(Role model);
+        Task<List<RoleDto>> GetAll();
+        Task<RoleDto> Get(int id);
+        Task Update(RoleUpdateDto model);
         Task Delete(int id);
-        Task Insert(Role model);
+        Task Insert(RoleDto model);
     }
 }
