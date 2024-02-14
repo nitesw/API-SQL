@@ -1,4 +1,7 @@
 using NewsApi.Core;
+using NewsApi.Core.DTOs;
+using NewsApi.Core.Entities;
+using NewsApi.Core.Interfaces;
 using NewsApi.Infrastructure;
 
 namespace NewsApi.Web
@@ -43,7 +46,6 @@ namespace NewsApi.Web
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

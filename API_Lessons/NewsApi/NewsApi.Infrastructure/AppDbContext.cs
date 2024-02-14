@@ -17,6 +17,8 @@ namespace NewsApi.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Author>().HasIndex(c => c.Username).IsUnique(true);
+
             modelBuilder.SeedCategory();
             modelBuilder.SeedNews();
             modelBuilder.SeedAuthor();

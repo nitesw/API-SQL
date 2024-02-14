@@ -40,7 +40,14 @@ namespace NewsApi.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Authors");
 
@@ -50,42 +57,56 @@ namespace NewsApi.Infrastructure.Migrations
                             Id = 1,
                             Age = 37,
                             Name = "Tim",
-                            Surname = "Bontemps"
+                            Surname = "Bontemps",
+                            Username = "TB11"
                         },
                         new
                         {
                             Id = 2,
                             Age = 39,
                             Name = "Bill",
-                            Surname = "Barnwell"
+                            Surname = "Barnwell",
+                            Username = "Bill39"
                         },
                         new
                         {
                             Id = 3,
                             Age = 42,
                             Name = "Laura",
-                            Surname = "Sanders"
+                            Surname = "Sanders",
+                            Username = "Lau22"
                         },
                         new
                         {
                             Id = 4,
                             Age = 53,
                             Name = "Bruce",
-                            Surname = "Bower"
+                            Surname = "Bower",
+                            Username = "Bower33"
                         },
                         new
                         {
                             Id = 5,
                             Age = 32,
                             Name = "Aadel",
-                            Surname = "Chaudhuri"
+                            Surname = "Chaudhuri",
+                            Username = "Aadel101"
                         },
                         new
                         {
                             Id = 6,
                             Age = 44,
                             Name = "Katharine",
-                            Surname = "Lang"
+                            Surname = "Lang",
+                            Username = "Lang1000"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Age = 29,
+                            Name = "Bruce",
+                            Surname = "William",
+                            Username = "Brll33"
                         });
                 });
 

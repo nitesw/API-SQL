@@ -99,12 +99,13 @@ namespace NewsApi.Infrastructure.Initializers
         {
             modelBuilder.Entity<Author>().HasData(new Author[]
                 {
-                    new Author() { Id = 1, Name = "Tim", Surname = "Bontemps", Age = 37 },
-                    new Author() { Id = 2, Name = "Bill", Surname = "Barnwell", Age = 39 },
-                    new Author() { Id = 3, Name = "Laura", Surname = "Sanders", Age = 42 },
-                    new Author() { Id = 4, Name = "Bruce", Surname = "Bower", Age = 53 },
-                    new Author() { Id = 5, Name = "Aadel", Surname = "Chaudhuri", Age = 32 },
-                    new Author() { Id = 6, Name = "Katharine", Surname = "Lang", Age = 44 }
+                    new Author() { Id = 1, Name = "Tim", Surname = "Bontemps", Username = "TB11", Age = 37 },
+                    new Author() { Id = 2, Name = "Bill", Surname = "Barnwell", Username = "Bill39",  Age = 39 },
+                    new Author() { Id = 3, Name = "Laura", Surname = "Sanders", Username = "Lau22",  Age = 42 },
+                    new Author() { Id = 4, Name = "Bruce", Surname = "Bower", Username = "Bower33",  Age = 53 },
+                    new Author() { Id = 5, Name = "Aadel", Surname = "Chaudhuri", Username = "Aadel101",  Age = 32 },
+                    new Author() { Id = 6, Name = "Katharine", Surname = "Lang", Username = "Lang1000", Age = 44 },
+                    new Author() { Id = 7, Name = "Bruce", Surname = "William", Username = "Brll33", Age = 29 }
                 }
             );
         }

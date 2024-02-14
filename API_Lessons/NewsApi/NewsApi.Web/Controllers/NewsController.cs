@@ -11,6 +11,7 @@ namespace NewsApi.Web.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
+        //private readonly IService<News> _newsService;
         private readonly INewsService _newsService;
 
         public NewsController(INewsService newsService)
@@ -28,6 +29,18 @@ namespace NewsApi.Web.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var news = await _newsService.Get(id);
+            return Ok(news);
+        }
+        [HttpPost("GetByCategory")]
+        public async Task<IActionResult> GetByCategory(int id)
+        {
+            var news = await _newsService.GetByCategory(id);
+            return Ok(news);
+        }
+        [HttpPost("GetByAuthor")]
+        public async Task<IActionResult> GetByAuthor(string username)
+        {
+            var news = await _newsService.GetByAuthor(username);
             return Ok(news);
         }
         [HttpDelete("Delete")]

@@ -10,9 +10,9 @@ namespace NewsApi.Web.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly IRoleService _roleService;
+        private readonly IService<Role> _roleService;
 
-        public RoleController(IRoleService roleService)
+        public RoleController(IService<Role> roleService)
         {
             _roleService = roleService;
         }
@@ -36,13 +36,13 @@ namespace NewsApi.Web.Controllers
             return Ok();
         }
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(RoleUpdateDto roleToUpdate)
+        public async Task<IActionResult> Update(Role roleToUpdate)
         {
             await _roleService.Update(roleToUpdate);
             return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(RoleDto model)
+        public async Task<IActionResult> Insert(Role model)
         {
             await _roleService.Insert(model);
             return Ok();
