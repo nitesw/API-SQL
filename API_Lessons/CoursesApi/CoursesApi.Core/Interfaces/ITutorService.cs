@@ -14,5 +14,7 @@ namespace CoursesApi.Core.Interfaces
         Task Update(TutorDto model);
         Task Delete(int id);
         Task Insert(TutorDto model);
+        Task<List<TutorDto>> GetByRating(int rating);
+        Task<TutorDto> GetByEmail(string email);
     }
 }

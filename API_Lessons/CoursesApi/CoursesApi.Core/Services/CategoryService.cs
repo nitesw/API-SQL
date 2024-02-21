@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using CoursesApi.Core.DTOs;
 using CoursesApi.Core.Entities;
+using CoursesApi.Core.Entities.Specifications;
 using CoursesApi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CoursesApi.Core.Entities.Specifications.TutorSpecification;
 
 namespace CoursesApi.Core.Services
 {
@@ -35,6 +37,16 @@ namespace CoursesApi.Core.Services
         public async Task<List<CategoryDto>> GetAll()
         {
             return _mapper.Map<List<CategoryDto>>(await _categoryRepository.GetAll());
+        }
+
+        public async Task<CategoryDto> GetByName(string name)
+        {
+            var res = await _categoryRepository.GetItemBySpec(new CategorySpecification.ByName(name));
+            if(res != null)
+            { 
+                return _mapper.Map<CategoryDto>(res);
+            }
+            return null;
         }
 
         public async Task Insert(CategoryDto model)

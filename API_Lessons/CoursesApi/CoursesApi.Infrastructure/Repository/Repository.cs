@@ -1,4 +1,6 @@
-﻿using CoursesApi.Core.Interfaces;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using CoursesApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,6 +50,22 @@ namespace CoursesApi.Infrastructure.Repository
         public async Task<IEnumerable<IEntity>> GetAll()
         {
             return await dbSet.ToListAsync();
+        }
+
+        public async Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<TEntity>?> GetListBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(dbSet, specification);
         }
 
         public async Task Insert(TEntity entity)

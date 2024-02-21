@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "unMS+Tp8XKHf61rN6XLKQG5uzFspWYB+m1Hh8uLXPO095GxUAfAmbH6hOrlDpzPhgGakLGvpBoIcGH528SDelw==",
+  "dgSpecHash": "nJu8yDsBuLa2lJL+sSmIINUO2jYjo3SrQQygFU2gNDqKB2QZbcjjf5aqKNiCLBbODuqQee9Hy2hzbM5BdPxAtw==",
   "success": true,
-  "projectFilePath": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj",
+  "projectFilePath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\apedo\\.nuget\\packages\\ardalis.specification\\8.0.0\\ardalis.specification.8.0.0.nupkg.sha512",
     "C:\\Users\\apedo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",

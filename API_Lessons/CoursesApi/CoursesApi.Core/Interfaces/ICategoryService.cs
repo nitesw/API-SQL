@@ -14,5 +14,6 @@ namespace CoursesApi.Core.Interfaces
         Task Update(CategoryDto model);
         Task Delete(int id);
         Task Insert(CategoryDto model);
+        Task<CategoryDto> GetByName(string name);
     }
 }

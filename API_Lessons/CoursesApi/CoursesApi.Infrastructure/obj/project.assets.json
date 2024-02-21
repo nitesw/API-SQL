@@ -3615,11 +3615,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
+      "projectUniqueName": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
       "projectName": "CoursesApi.Infrastructure",
-      "projectPath": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
+      "projectPath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\apedo\\.nuget\\packages\\",
-      "outputPath": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\obj\\",
+      "outputPath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programs\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -3642,8 +3642,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj": {
-              "projectPath": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj"
+            "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj": {
+              "projectPath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Core\\CoursesApi.Core.csproj"
             }
           }
         }

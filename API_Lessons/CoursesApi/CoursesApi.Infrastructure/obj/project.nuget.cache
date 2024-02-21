@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yNBaQLPSdWd2mwmU1Na/Sy4mlaqc9zjVhlUBEN/5+wVNMKdlgtVOUyOv4RpMPUM5HquiBmpe0YzHE/YvS+9aWg==",
+  "dgSpecHash": "4avLBtZNcQcMKauiX5uFqj8OVAPmOd1a/7YReksWwN+UmJfbshqJMGxr48FMDK3ZkRumtdtCHwh2iDHcDt1U0w==",
   "success": true,
-  "projectFilePath": "E:\\ITStep_SQL_With_CSharp_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
+  "projectFilePath": "E:\\ITStep_API_With_SQL_Lessons\\API_Lessons\\CoursesApi\\CoursesApi.Infrastructure\\CoursesApi.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\apedo\\.nuget\\packages\\ardalis.specification\\8.0.0\\ardalis.specification.8.0.0.nupkg.sha512",
     "C:\\Users\\apedo\\.nuget\\packages\\ardalis.specification.entityframeworkcore\\8.0.0\\ardalis.specification.entityframeworkcore.8.0.0.nupkg.sha512",

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoursesApi.Core.DTOs;
 using CoursesApi.Core.Entities;
+using CoursesApi.Core.Entities.Specifications;
 using CoursesApi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,28 @@ namespace CoursesApi.Core.Services
         public async Task<List<CourseDto>> GetAll()
         {
             return _mapper.Map<List<CourseDto>>(await _courseRepository.GetAll());
+        }
+
+        public async Task<List<CourseDto>> GetByCategory(int id)
+        {
+            var res = await _courseRepository.GetListBySpec(new CoursesSpecification.ByCategory(id));
+            return _mapper.Map<List<CourseDto>>(res);
+        }
+
+        public async Task<CourseDto> GetByName(string name)
+        {
+            var res = await _courseRepository.GetItemBySpec(new CoursesSpecification.ByName(name));
+            if(res != null)
+            {
+                return _mapper.Map<CourseDto>(res);
+            }
+            return null;
+        }
+
+        public async Task<List<CourseDto>> GetByTutorEmail(string email)
+        {
+            var res = await _courseRepository.GetListBySpec(new CoursesSpecification.ByTutorMail(email));
+            return _mapper.Map<List<CourseDto>>(res);
         }
 
         public async Task Insert(CourseDto model)
