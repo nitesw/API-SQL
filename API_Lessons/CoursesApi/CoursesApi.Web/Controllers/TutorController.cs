@@ -44,50 +44,20 @@ namespace CoursesApi.Web.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            List<TutorDto> tutors = await _tutorService.GetAll();
-
-            bool isExists = false;
-            foreach (var item in tutors)
-            {
-                if (item.Id == id)
-                {
-                    isExists = true;
-                }
-            }
-
-            if (!isExists)
-            {
-                return Ok("There is no tutor with this id!");
-            }
-
-            await _tutorService.Delete(id);
-            return Ok("Tutor deleted successfully!");
+            var tutor = await _tutorService.Delete(id);
+            return Ok(tutor);
         }
         [HttpPatch("Update")]
         public async Task<IActionResult> Update(TutorDto tutorToUpdate)
         {
-            var existingTutor = await _tutorService.GetByEmail(tutorToUpdate.Email);
-
-            if (existingTutor != null && existingTutor.Id != tutorToUpdate.Id)
-            {
-                return Ok("Tutor with this name already exists!");
-            }
-
-            await _tutorService.Update(tutorToUpdate);
-            return Ok("Tutor updated successfully!");
+            var tutor = await _tutorService.Update(tutorToUpdate);
+            return Ok(tutor);
         }
         [HttpPost("Insert")]
         public async Task<IActionResult> Insert(TutorDto model)
         {
-            var existingTutor = await _tutorService.GetByEmail(model.Email);
-
-            if (existingTutor != null)
-            {
-                return Ok("Tutor with this email already exists!");
-            }
-
-            await _tutorService.Insert(model);
-            return Ok("Tutor is added successfully!");
+            var tutor = await _tutorService.Insert(model);
+            return Ok(tutor);
         }
     }
 }

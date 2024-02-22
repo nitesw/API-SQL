@@ -38,50 +38,20 @@ namespace CoursesApi.Web.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            List<CategoryDto> categories = await _categoryService.GetAll();
-
-            bool isExists = false;
-            foreach (var item in categories)
-            {
-                if (item.Id == id)
-                {
-                    isExists = true;
-                }
-            }
-
-            if (!isExists)
-            {
-                return Ok("There is no category with this id!");
-            }
-
-            await _categoryService.Delete(id);
-            return Ok("Category deleted successfully!");
+            var course = await _categoryService.Delete(id);
+            return Ok(course);
         }
         [HttpPatch("Update")]
         public async Task<IActionResult> Update(CategoryDto categoryToUpdate)
         {
-            var existingCategory = await _categoryService.GetByName(categoryToUpdate.Name);
-
-            if (existingCategory != null && existingCategory.Id != categoryToUpdate.Id)
-            {
-                return Ok("Category with this name already exists!");
-            }
-
-            await _categoryService.Update(categoryToUpdate);
-            return Ok("Category updated successfully!");
+            var course = await _categoryService.Update(categoryToUpdate);
+            return Ok(course);
         }
         [HttpPost("Insert")]
         public async Task<IActionResult> Insert(CategoryDto model)
         {
-            var existingCategory = await _categoryService.GetByName(model.Name);
-
-            if (existingCategory != null)
-            {
-                return Ok("Category with this name already exists!");
-            }
-
-            await _categoryService.Insert(model);
-            return Ok("Category added successfully!");
+            var course = await _categoryService.Insert(model);
+            return Ok(course);
         }
     }
 }

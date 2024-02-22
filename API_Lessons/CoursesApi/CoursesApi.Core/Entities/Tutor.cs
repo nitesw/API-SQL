@@ -26,7 +26,7 @@ namespace CoursesApi.Core.Entities
         public int Rating
         {
             get { return rating; }
-            set { rating = value > 0 && value < 6 ? value : 1; }
+            set { rating = value > 0 || value < 6 ? value : 1; }
         }
 
         [EmailAddress]

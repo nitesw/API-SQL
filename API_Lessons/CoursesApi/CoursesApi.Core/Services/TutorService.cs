@@ -24,48 +24,251 @@ namespace CoursesApi.Core.Services
             _mapper = mapper;
         }
 
-        public async Task Delete(int id)
+        public async Task<ServiceResponse> Delete(int id)
         {
-            await _tutorRepository.Delete(id);
-            await _tutorRepository.Save();
-        }
+            var data = await GetAll();
+            List<TutorDto> courses = (List<TutorDto>)data.Payload;
+            bool isExists = false;
 
-        public async Task<TutorDto> Get(int id)
-        {
-            return _mapper.Map<TutorDto>(await _tutorRepository.Get(id));
-        }
-
-        public async Task<List<TutorDto>> GetAll()
-        {
-            return _mapper.Map<List<TutorDto>>(await _tutorRepository.GetAll());
-        }
-
-        public async Task<TutorDto> GetByEmail(string email)
-        {
-            var res = await _tutorRepository.GetItemBySpec(new TutorSpecification.ByEmail(email));
-            if (res != null)
+            foreach (var item in courses)
             {
-                return _mapper.Map<TutorDto>(res);
+                if (item.Id == id)
+                {
+                    isExists = true;
+                }
             }
-            return null;
+
+            if (!isExists)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else if (isExists)
+            {
+                await _tutorRepository.Delete(id);
+                await _tutorRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutor successfully deleted",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task<List<TutorDto>> GetByRating(int rating)
+        public async Task<ServiceResponse> Get(int id)
         {
-            var res = await _tutorRepository.GetListBySpec(new TutorSpecification.ByRating(rating));
-            return _mapper.Map<List<TutorDto>>(res);
+            var data = _mapper.Map<TutorDto>(await _tutorRepository.Get(id));
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The tutor successfully loaded",
+                    Payload = data
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Insert(TutorDto model)
+        public async Task<ServiceResponse> GetAll()
         {
-            await _tutorRepository.Insert(_mapper.Map<Tutor>(model));
-            await _tutorRepository.Save();
+            var data = _mapper.Map<List<TutorDto>>(await _tutorRepository.GetAll());
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "All tutors successfully loaded",
+                    Payload = data
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The database is empty",
+                    Payload = data
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Update(TutorDto model)
+        public async Task<ServiceResponse> GetByEmail(string email)
         {
-            await _tutorRepository.Update(_mapper.Map<Tutor>(model));
-            await _tutorRepository.Save();
+            var data = await _tutorRepository.GetItemBySpec(new TutorSpecification.ByEmail(email));
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutor successfully loaded by email",
+                    Payload = _mapper.Map<TutorDto>(data)
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The tutor's email you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> GetByRating(int rating)
+        {
+            var data = await _tutorRepository.GetListBySpec(new TutorSpecification.ByRating(rating));
+            if (data != null && data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutors successfully loaded by rating",
+                    Payload = _mapper.Map<List<TutorDto>>(data)
+                };
+            }
+            else if (data != null && !data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The tutors with rating you are trying to access does not exists",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> Insert(TutorDto model)
+        {
+            var data = await GetByEmail(model.Email);
+
+            if (data.Success && data.Payload == null)
+            {
+                await _tutorRepository.Insert(_mapper.Map<Tutor>(model));
+                await _tutorRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutor is successfully added",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "A course with the same name already exists",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> Update(TutorDto model)
+        {
+            var data = await GetByEmail(model.Email);
+
+            if (data.Success && data.Payload != null && ((TutorDto)data.Payload).Id != model.Id)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutor with the same name already exists",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                await _tutorRepository.Update(_mapper.Map<Tutor>(model));
+                await _tutorRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Tutor is successfully updated",
+                    Payload = null
+                };
+
+            }
         }
     }
 }

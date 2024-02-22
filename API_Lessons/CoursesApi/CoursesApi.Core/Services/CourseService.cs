@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CoursesApi.Core.Entities.Specifications.TutorSpecification;
 
 namespace CoursesApi.Core.Services
 {
@@ -22,54 +23,283 @@ namespace CoursesApi.Core.Services
             _mapper = mapper;
         }
 
-        public async Task Delete(int id)
+        public async Task<ServiceResponse> Delete(int id)
         {
-            await _courseRepository.Delete(id);
-            await _courseRepository.Save();
-        }
+            var data = await GetAll();
+            List<CourseDto> courses = (List<CourseDto>)data.Payload;
+            bool isExists = false;
 
-        public async Task<CourseDto> Get(int id)
-        {
-            return _mapper.Map<CourseDto>(await _courseRepository.Get(id));
-        }
-
-        public async Task<List<CourseDto>> GetAll()
-        {
-            return _mapper.Map<List<CourseDto>>(await _courseRepository.GetAll());
-        }
-
-        public async Task<List<CourseDto>> GetByCategory(int id)
-        {
-            var res = await _courseRepository.GetListBySpec(new CoursesSpecification.ByCategory(id));
-            return _mapper.Map<List<CourseDto>>(res);
-        }
-
-        public async Task<CourseDto> GetByName(string name)
-        {
-            var res = await _courseRepository.GetItemBySpec(new CoursesSpecification.ByName(name));
-            if(res != null)
+            foreach (var item in courses)
             {
-                return _mapper.Map<CourseDto>(res);
+                if (item.Id == id)
+                {
+                    isExists = true;
+                }
             }
-            return null;
+
+            if (!isExists)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else if(isExists)
+            {
+                await _courseRepository.Delete(id);
+                await _courseRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Course successfully deleted",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task<List<CourseDto>> GetByTutorEmail(string email)
+        public async Task<ServiceResponse> Get(int id)
         {
-            var res = await _courseRepository.GetListBySpec(new CoursesSpecification.ByTutorMail(email));
-            return _mapper.Map<List<CourseDto>>(res);
+            var data = _mapper.Map<CourseDto>(await _courseRepository.Get(id));
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The course successfully loaded",
+                    Payload = data
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Insert(CourseDto model)
+        public async Task<ServiceResponse> GetAll()
         {
-            await _courseRepository.Insert(_mapper.Map<Course>(model));
-            await _courseRepository.Save();
+            var data = _mapper.Map<List<CourseDto>>(await _courseRepository.GetAll());
+            if(data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "All courses successfully loaded",
+                    Payload = data
+                };
+            }
+            else if(data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The database is empty",
+                    Payload = data
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Update(CourseDto model)
+        public async Task<ServiceResponse> GetByCategory(int id)
         {
-            await _courseRepository.Update(_mapper.Map<Course>(model));
-            await _courseRepository.Save();
+            var data = await _courseRepository.GetListBySpec(new CoursesSpecification.ByCategory(id));
+            if (data != null && data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Courses successfully loaded by category id",
+                    Payload = _mapper.Map<List<CourseDto>>(data)
+                };
+            }
+            else if (data != null && !data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The category id you are trying to access does not exist",
+                    Payload = _mapper.Map<List<CourseDto>>(data)
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> GetByName(string name)
+        {
+            var data = await _courseRepository.GetItemBySpec(new CoursesSpecification.ByName(name));
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Course successfully loaded by name",
+                    Payload = _mapper.Map<CourseDto>(data)
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The course name you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> GetByTutorEmail(string email)
+        {
+            var data = await _courseRepository.GetListBySpec(new CoursesSpecification.ByTutorMail(email));
+            if (data != null && data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Courses successfully loaded by tutor email",
+                    Payload = _mapper.Map<List<CourseDto>>(data)
+                };
+            }
+            else if (data != null && !data.Any())
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The tutor's email you are trying to access does not exist",
+                    Payload = _mapper.Map<List<CourseDto>>(data)
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> Insert(CourseDto model)
+        {
+            var data = await GetByName(model.Name);
+
+            if (data.Success && data.Payload == null)
+            {
+                await _courseRepository.Insert(_mapper.Map<Course>(model));
+                await _courseRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Course is successfully added",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "A course with the same name already exists",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> Update(CourseDto model)
+        {
+            var data = await GetByName(model.Name);
+
+            if (data.Success && data.Payload != null && ((CourseDto)data.Payload).Id != model.Id)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "A course with the same name already exists",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                await _courseRepository.Update(_mapper.Map<Course>(model));
+                await _courseRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Course is successfully updated",
+                    Payload = null
+                };
+                
+            }
         }
     }
 }

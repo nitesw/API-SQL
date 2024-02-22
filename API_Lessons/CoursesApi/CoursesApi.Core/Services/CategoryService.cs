@@ -23,42 +23,221 @@ namespace CoursesApi.Core.Services
             _mapper = mapper;
         }
 
-        public async Task Delete(int id)
+        public async Task<ServiceResponse> Delete(int id)
         {
-            await _categoryRepository.Delete(id);
-            await _categoryRepository.Save();
-        }
+            var data = await GetAll();
+            List<CategoryDto> courses = (List<CategoryDto>)data.Payload;
+            bool isExists = false;
 
-        public async Task<CategoryDto> Get(int id)
-        {
-            return _mapper.Map<CategoryDto>(await _categoryRepository.Get(id));
-        }
-
-        public async Task<List<CategoryDto>> GetAll()
-        {
-            return _mapper.Map<List<CategoryDto>>(await _categoryRepository.GetAll());
-        }
-
-        public async Task<CategoryDto> GetByName(string name)
-        {
-            var res = await _categoryRepository.GetItemBySpec(new CategorySpecification.ByName(name));
-            if(res != null)
-            { 
-                return _mapper.Map<CategoryDto>(res);
+            foreach (var item in courses)
+            {
+                if (item.Id == id)
+                {
+                    isExists = true;
+                }
             }
-            return null;
+
+            if (!isExists)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else if (isExists)
+            {
+                await _categoryRepository.Delete(id);
+                await _categoryRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Category successfully deleted",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Insert(CategoryDto model)
+        public async Task<ServiceResponse> Get(int id)
         {
-            await _categoryRepository.Insert(_mapper.Map<Category>(model));
-            await _categoryRepository.Save();
+            var data = _mapper.Map<CategoryDto>(await _categoryRepository.Get(id));
+
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The category successfully loaded",
+                    Payload = data
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The id you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
         }
 
-        public async Task Update(CategoryDto model)
+        public async Task<ServiceResponse> GetAll()
         {
-            await _categoryRepository.Update(_mapper.Map<Category>(model));
-            await _categoryRepository.Save();
+            var data = _mapper.Map<List<CategoryDto>>(await _categoryRepository.GetAll());
+
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "All categories successfully loaded",
+                    Payload = data
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The database is empty",
+                    Payload = data
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> GetByName(string name)
+        {
+            var data = await _categoryRepository.GetItemBySpec(new CategorySpecification.ByName(name));
+            if (data != null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Category successfully loaded by name",
+                    Payload = _mapper.Map<CategoryDto>(data)
+                };
+            }
+            else if (data == null)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "The category name you are trying to access does not exist",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> Insert(CategoryDto model)
+        {
+            var data = await GetByName(model.Name);
+
+            if (data.Success && data.Payload == null)
+            {
+                await _categoryRepository.Insert(_mapper.Map<Category>(model));
+                await _categoryRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Category is successfully added",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "A category with the same name already exists",
+                    Payload = null
+                };
+            }       
+        }
+
+        public async Task<ServiceResponse> Update(CategoryDto model)
+        {
+            var data = await GetByName(model.Name);
+
+            if (data.Success && data.Payload != null && ((CategoryDto)data.Payload).Id != model.Id)
+            {
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "A category with the same name already exists",
+                    Payload = null
+                };
+            }
+            else if (!data.Success)
+            {
+                return new ServiceResponse
+                {
+                    Success = false,
+                    Message = "There is some error has occurred",
+                    Payload = null
+                };
+            }
+            else
+            {
+                await _categoryRepository.Update(_mapper.Map<Category>(model));
+                await _categoryRepository.Save();
+
+                return new ServiceResponse
+                {
+                    Success = true,
+                    Message = "Category is successfully updated",
+                    Payload = null
+                };
+
+            }
         }
     }
 }

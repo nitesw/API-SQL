@@ -52,50 +52,20 @@ namespace CoursesApi.Web.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            List<CourseDto> courses = await _courseService.GetAll();
-
-            bool isExists = false;
-            foreach (var item in courses)
-            {
-                if (item.Id == id)
-                {
-                    isExists = true;
-                }
-            }
-
-            if (!isExists)
-            {
-                return Ok("There is no course with this id!");
-            }
-
-            await _courseService.Delete(id);
-            return Ok("Course deleted successfully!");
+            var course = await _courseService.Delete(id);
+            return Ok(course);
         }
         [HttpPatch("Update")]
         public async Task<IActionResult> Update(CourseDto courseToUpdate)
         {
-            var existingCourse = await _courseService.GetByName(courseToUpdate.Name);
-
-            if(existingCourse != null && existingCourse.Id != courseToUpdate.Id)
-            {
-                return Ok("Course with this name is already exists!");
-            }    
-
-            await _courseService.Update(courseToUpdate);
-            return Ok("Course updated successfully!");
+            var course = await _courseService.Update(courseToUpdate);
+            return Ok(course);
         }
         [HttpPost("Insert")]
         public async Task<IActionResult> Insert(CourseDto model)
         {
-            var existingCourse = await _courseService.GetByName(model.Name);
-
-            if (existingCourse != null)
-            {
-                return Ok("Course with this name is already exists!");
-            }
-
-            await _courseService.Insert(model);
-            return Ok("Course added successfully!");
+            var course = await _courseService.Insert(model);
+            return Ok(course);
         }
     }
 }

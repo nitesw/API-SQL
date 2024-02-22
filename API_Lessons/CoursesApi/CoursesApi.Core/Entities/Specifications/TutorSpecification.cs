@@ -13,7 +13,7 @@ namespace CoursesApi.Core.Entities.Specifications
         {
             public ByRating(int rating)
             {
-                if(rating < 6 && rating > 0)
+                if (rating >= 1 || rating <= 5)
                 {
                     Query.Where(t => t.Rating == rating);
                 }

@@ -1,4 +1,5 @@
 ﻿using CoursesApi.Core.DTOs;
+using CoursesApi.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace CoursesApi.Core.Interfaces
 {
     public interface ITutorService
     {
-        Task<List<TutorDto>> GetAll();
-        Task<TutorDto> Get(int id);
-        Task Update(TutorDto model);
-        Task Delete(int id);
-        Task Insert(TutorDto model);
-        Task<List<TutorDto>> GetByRating(int rating);
-        Task<TutorDto> GetByEmail(string email);
+        Task<ServiceResponse> GetAll();
+        Task<ServiceResponse> Get(int id);
+        Task<ServiceResponse> Update(TutorDto model);
+        Task<ServiceResponse> Delete(int id);
+        Task<ServiceResponse> Insert(TutorDto model);
+        Task<ServiceResponse> GetByRating(int rating);
+        Task<ServiceResponse> GetByEmail(string email);
     }
 }
