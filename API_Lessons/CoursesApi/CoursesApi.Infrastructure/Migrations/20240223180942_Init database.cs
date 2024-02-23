@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -24,6 +25,22 @@ namespace CoursesApi.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IpAdress",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Time = table.Column<TimeOnly>(type: "time", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Operation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ip = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IpAdress", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,6 +149,9 @@ namespace CoursesApi.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Course");
+
+            migrationBuilder.DropTable(
+                name: "IpAdress");
 
             migrationBuilder.DropTable(
                 name: "Category");

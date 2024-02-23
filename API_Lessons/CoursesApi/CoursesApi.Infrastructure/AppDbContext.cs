@@ -29,5 +29,6 @@ namespace CoursesApi.Infrastructure
         public DbSet<Course> Course { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Tutor> Tutor { get; set; }
+        public DbSet<IpAdress> IpAdress { get; set; }
     }
 }

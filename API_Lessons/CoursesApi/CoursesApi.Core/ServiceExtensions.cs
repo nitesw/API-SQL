@@ -20,6 +20,7 @@ namespace CoursesApi.Core
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ITutorService, TutorService>();
+            services.AddScoped<IIpAdressService, IpAdressService>();
         }
 
         public static void AddMapping(this IServiceCollection services)
