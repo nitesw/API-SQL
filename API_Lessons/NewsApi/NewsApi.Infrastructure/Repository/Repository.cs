@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NewsApi.Core.Interfaces;
 using System;
@@ -68,6 +69,22 @@ namespace NewsApi.Infrastructure.Repository
                 dbSet.Attach(entityToUpdate);
                 context.Entry(entityToUpdate).State = EntityState.Modified;
             });
+        }
+
+        public async Task<TEntity> GetItemBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetListBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(dbSet, specification);
         }
     }
 }

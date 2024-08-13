@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vj+irss16t8sYo+9gOALF71TY/i0uvWyFyh6rIgJ0mY=",
+  "Source": "CoursesApi.Web",
+  "BasePath": "_content/CoursesApi.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

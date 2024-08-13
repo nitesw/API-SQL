@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NewsApi.Core.DTOs;
 using NewsApi.Core.Entities;
+using NewsApi.Core.Entities.Specifications;
 using NewsApi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,18 @@ namespace NewsApi.Core.Services
         {
             await _newsRepository.Update(_mapper.Map<News>(model));
             await _newsRepository.Save();
+        }
+
+        public async Task<List<News>> GetByCategory(int id)
+        {
+            var result = await _newsRepository.GetListBySpec(new NewsSpecification.ByCategory(id));
+            return _mapper.Map<List<News>>(result);
+        }
+
+        public async Task<List<News>> GetByAuthor(string username)
+        {
+            var result = await _newsRepository.GetListBySpec(new NewsSpecification.ByAuthor(username));
+            return _mapper.Map<List<News>>(result);
         }
     }
 }

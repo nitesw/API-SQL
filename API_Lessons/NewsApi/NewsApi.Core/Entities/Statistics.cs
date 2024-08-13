@@ -16,6 +16,6 @@ namespace NewsApi.Core.Entities
         public string VisitorCountry { get; set; } = string.Empty;
 
         public int NewsId { get; set; }
-        public virtual News News { get; set; }
+        public News? News { get; set; }
     }
 }

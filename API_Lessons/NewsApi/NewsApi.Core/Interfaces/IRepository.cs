@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ardalis.Specification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,8 @@ namespace NewsApi.Core.Interfaces
         Task Delete(TEntity entityToDelete);
 
         Task Update(TEntity entity);
+
+        Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification);
+        Task<IEnumerable<TEntity>?> GetListBySpec(ISpecification<TEntity> specification);
     }
 }

@@ -33,6 +33,6 @@ namespace NewsApi.Core.Entities
         public string Phone { get; set; } = string.Empty;
 
         public int RoleId { get; set; }
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
     }
 }

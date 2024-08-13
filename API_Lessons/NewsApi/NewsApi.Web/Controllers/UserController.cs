@@ -10,9 +10,9 @@ namespace NewsApi.Web.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IService<User> _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IService<User> userService)
         {
             _userService = userService;
         }
@@ -36,13 +36,13 @@ namespace NewsApi.Web.Controllers
             return Ok();
         }
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(UserUpdateDto userToUpdate)
+        public async Task<IActionResult> Update(User userToUpdate)
         {
             await _userService.Update(userToUpdate);
             return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(UserDto model)
+        public async Task<IActionResult> Insert(User model)
         {
             await _userService.Insert(model);
             return Ok();

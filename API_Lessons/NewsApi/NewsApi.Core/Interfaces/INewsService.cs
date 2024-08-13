@@ -15,5 +15,7 @@ namespace NewsApi.Core.Interfaces
         Task Update(NewsUpdateDto model);
         Task Delete(int id);
         Task Insert(NewsDto model);
+        Task<List<News>> GetByCategory(int id);
+        Task<List<News>> GetByAuthor(string username);
     }
 }
